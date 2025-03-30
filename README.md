@@ -50,12 +50,12 @@
 ## LLM Projects - Fine Tuning
 
 ### Sentiment Analysis for Financial News
-- Built a fine-tuned model to predict the sentiment of the news article and recevied a **gold star** for the [notebook](https://www.kaggle.com/code/ravitee/sentiment-analysis-on-financial-news-using-llama2/notebook){:target="_blank"} I published in Kaggle.
+- Built a fine-tuned model to predict the sentiment of the news article and recevied a **gold star** for the [notebook](https://www.kaggle.com/code/ravitee/sentiment-analysis-on-financial-news-using-llama2/notebook) I published in Kaggle.
 1. Used accelerate, peft, bitsandbytes, transformers and trl libraries to fine tune a llama-2 base model.
 2. Used float16 data type for computations and retrained the non-linear layer of the base model.
 
 ### Predict the LLM
-- Built a multi-class classification model to predict the LLM that produced the test data. Dataset can be found in [Kaggle](https://www.kaggle.com/competitions/h2oai-predict-the-llm){:target="_blank"}
+- Built a multi-class classification model to predict the LLM that produced the test data. Dataset can be found in [Kaggle](https://www.kaggle.com/competitions/h2oai-predict-the-llm)
 1. Used accelerate, peft, bitsandbytes, transformers to fine tune Mistral-7B.
 2. Used Weights & Biases to store the training/trial runs.
 3. Used Lora to target re-training of attention blocks.
@@ -65,20 +65,20 @@
 ## Data Science Projects
 
 ### Datasets Practiced from Kaggle
-1. [Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud){:target="_blank"} &nbsp;&nbsp;&nbsp;&nbsp; 	[#imbalanced]() [#BinaryClassification]()
-2. [House Price Prediction](https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques){:target="_blank"} &nbsp;&nbsp;&nbsp;&nbsp;	[#Regression]()
-3. [Quora Question Pair](https://www.kaggle.com/competitions/quora-question-pairs){:target="_blank"} &nbsp;&nbsp;&nbsp;&nbsp; [#NLP]() [#Regression]()
-4. [Santander Product Recommendation](https://www.kaggle.com/c/santander-product-recommendation){:target="_blank"} &nbsp;&nbsp;&nbsp;&nbsp;[#RecommenderSystem]() [#MultiClassClassification]()
-5. [Toxic Comment Classification](https://www.kaggle.com/competitions/jigsaw-multilingual-toxic-comment-classification/overview){:target="_blank"} &nbsp;&nbsp;&nbsp;&nbsp;[#NLP]() [#Regression]()
-6. [Home Credit Default Risk](https://www.kaggle.com/competitions/home-credit-default-risk){:target="_blank"} &nbsp;&nbsp;&nbsp;&nbsp;[#Regression]()
-7. [NLP with Disaster Tweets](https://www.kaggle.com/competitions/nlp-getting-started){:target="_blank"} &nbsp;&nbsp;&nbsp;&nbsp;[#NLP]() [#BinaryClassification]()
-8. [Forecasting Sticker Sales](https://www.kaggle.com/competitions/playground-series-s5e1){:target="_blank"} &nbsp;&nbsp;&nbsp;&nbsp;[#TimeSeries]() [#Regression]()
-9. [Steel Plate Defect Prediction](https://www.kaggle.com/competitions/playground-series-s4e3){:target="_blank"} &nbsp;&nbsp;&nbsp;&nbsp;[#MultiClassClassiification]()
+1. [Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) &nbsp;&nbsp;&nbsp;&nbsp; 	[#imbalanced]() [#BinaryClassification]()
+2. [House Price Prediction](https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques) &nbsp;&nbsp;&nbsp;&nbsp;	[#Regression]()
+3. [Quora Question Pair](https://www.kaggle.com/competitions/quora-question-pairs) &nbsp;&nbsp;&nbsp;&nbsp; [#NLP]() [#Regression]()
+4. [Santander Product Recommendation](https://www.kaggle.com/c/santander-product-recommendation) &nbsp;&nbsp;&nbsp;&nbsp;[#RecommenderSystem]() [#MultiClassClassification]()
+5. [Toxic Comment Classification](https://www.kaggle.com/competitions/jigsaw-multilingual-toxic-comment-classification/overview) &nbsp;&nbsp;&nbsp;&nbsp;[#NLP]() [#Regression]()
+6. [Home Credit Default Risk](https://www.kaggle.com/competitions/home-credit-default-risk) &nbsp;&nbsp;&nbsp;&nbsp;[#Regression]()
+7. [NLP with Disaster Tweets](https://www.kaggle.com/competitions/nlp-getting-started) &nbsp;&nbsp;&nbsp;&nbsp;[#NLP]() [#BinaryClassification]()
+8. [Forecasting Sticker Sales](https://www.kaggle.com/competitions/playground-series-s5e1) &nbsp;&nbsp;&nbsp;&nbsp;[#TimeSeries]() [#Regression]()
+9. [Steel Plate Defect Prediction](https://www.kaggle.com/competitions/playground-series-s4e3) &nbsp;&nbsp;&nbsp;&nbsp;[#MultiClassClassiification]()
 
 # Published Articles
-1. [Santander Product Recommendation](https://medium.com/@ravitee/santander-product-recommendation-ee4122d15072){:target="_blank"}
-2. [Portfolio Optimization using Principal Component Analysis](https://medium.com/@ravitee/portfolio-optimization-using-principal-component-analysis-923f102a8a47){:target="_blank"}
-3. [A Primer on AI Agents](https://medium.com/@ravitee/a-primer-about-ai-agents-1e34f6dc7a4d){:target="_blank"}
+1. [Santander Product Recommendation](https://medium.com/@ravitee/santander-product-recommendation-ee4122d15072)
+2. [Portfolio Optimization using Principal Component Analysis](https://medium.com/@ravitee/portfolio-optimization-using-principal-component-analysis-923f102a8a47)
+3. [A Primer on AI Agents](https://medium.com/@ravitee/a-primer-about-ai-agents-1e34f6dc7a4d)
 
 # Contact
 ravi.thothadri@hotmail.com
