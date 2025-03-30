@@ -3,14 +3,16 @@
 
 ## LLM Projects - RAG
 
-### Financial Chat assistant
-- Developed a chat assistant to chat with Raymond James' 1Q25 Results (any PDF can be used) that had lot of charts. The goal was to bring the relevant chart while answering the questions.
+<!-- Refer to TechNotes git's LLM/RAG/LlamaIndex folder -->
+### Financial Chat assistant 
+- Developed a chat assistant to chat with [Raymond James' 1Q25 Results](https://www.raymondjames.com/-/media/rj/dotcom/files/our-company/news-and-media/2025-press-releases/rjf20250129-1q-presentation.pdf) (any PDF can be used) that had lot of charts. The goal was to bring the relevant chart while answering the questions.
 1. Used OpenAI's text-embedding-3-large model to capture nuanced semantic meanings.
 2. Used Llamaparse to extract text and images, using OpenAI's multimodal LLM, gpt-40
 3. Mapped text and image using LlamaIndex's data structure, TextNode.
 4. Created custom report output to output both Text and Image blocks for the query.
 5. Used gpt-4o to query.
 
+<!-- Google drive - Hypothetical Answers-->
 ### Retrieve News Articles using Hypothetical Answers
 - Developed a News assistant to answer broad-themed questions such as "What impact does the anti-trust case against google have on its long term value?"
 1. Used LLM to generate 10 different questions for the user question and LLM to generate hypothetical answers for those questions.
@@ -18,19 +20,21 @@
 3. Used similarity ranking to rank the fetched news articles against the hypothetical answers.
 4. Returned the top n news articles.
 
+<!-- Google drive-->
 ### Financial Analyst Agent
 - Developed a financial analyst to do sentiment and trend analysis on the market data for a provided ticker.
 1. Used crewai for orchestration.
 2. Built 2 agents, one to act as a Financial News Analyst, whose role is to collect and analyze financial news article to identify sentiment (and).
 3. Another agent to act as a Data Analyst, whose role is to analyze historical market data to identify trends.
 
+<!-- Refer to TechNotes git's LLM/Agentic AI Course/4.6 Assignment -->
 ### Study Assistant
 - Developed a Study Assistant using LangChain that:
 1. Summarizes study material into concise points.
 2. Automatically generates multiple-choice quiz questions based on the summarized content.
 3. Functions without the need for external retrieval mechanisms or vector database.
 
-
+<!-- Refer to TechNotes git's LLM/Agentic AI Course/5.Notebooks.5 -->
 ### Search engine retriever
 - Built a search engine on Wikipedia articles & some research papers such as Attention is all you need
 	1. Processed both text and PDF documents using LangChain
@@ -42,18 +46,20 @@
 		3. Contextual Compression Retrieval to filter out irrelevant information.
 		4. Chained Retrieval Pipeline, which inlcudes basic retrieval strategies such as cosine similarity, filtering out noise using LLM chain filtering compression and then use HF's BGE re-ranker model to re-rank the results.
 
+<!-- Refer to TechNotes git's LLM/Agentic AI Course/5.Notebooks.7 -->
 ### Evaluate Generated Content
 - Used RAGAS and DeepEval to evaluate context that was retrieved and the response provided.
 	1. Used ContextualPrecisionMetric ContextualRecallMetric and ContextualRelevancyMetric to evaluate the context retrieved.
 	2. Used AnswerRelevancyMetric, with both a LLM and a similarity based approach, using RAGA framework to evaluate the response.
 	
 ## LLM Projects - Fine Tuning
-
+<!-- Kaggle -->
 ### Sentiment Analysis for Financial News
 - Built a fine-tuned model to predict the sentiment of the news article and recevied a **gold star** for the [notebook](https://www.kaggle.com/code/ravitee/sentiment-analysis-on-financial-news-using-llama2/notebook) I published in Kaggle.
 1. Used accelerate, peft, bitsandbytes, transformers and trl libraries to fine tune a llama-2 base model.
 2. Used float16 data type for computations and retrained the non-linear layer of the base model.
 
+<!-- Kaggle -->
 ### Predict the LLM
 - Built a multi-class classification model to predict the LLM that produced the test data. Dataset can be found in [Kaggle](https://www.kaggle.com/competitions/h2oai-predict-the-llm)
 1. Used accelerate, peft, bitsandbytes, transformers to fine tune Mistral-7B.
