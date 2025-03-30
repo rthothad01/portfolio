@@ -26,16 +26,16 @@
 	2. Used to AnswerRelevancyMetric using a LLM approach and a similarity based approach using RAGA framework to evaluate the response.
 	
 ## Datasets Practiced from Kaggle
-1. [Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) [#imbalanced]() [#BinaryClassification]()
-2. [Predict the LLM](https://www.kaggle.com/competitions/h2oai-predict-the-llm) where I fine-tuned a Mistral-7B model [#NLP]() [#MultiClassClassiification]()
-3. [House Price Prediction](https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques) [#Regression]()
-4. [Quora Question Pair](https://www.kaggle.com/competitions/quora-question-pairs) [#NLP]() [#Regression]()
-5. [Santander Product Recommendation](https://www.kaggle.com/c/santander-product-recommendation)[#RecommenderSystem]() [#MultiClassClassification]()
-6. [Toxic Comment Classification](https://www.kaggle.com/competitions/jigsaw-multilingual-toxic-comment-classification/overview) [#NLP]() [#Regression]()
-7. [Home Credit Default Risk](https://www.kaggle.com/competitions/home-credit-default-risk) [#Regression]()
-8. [NLP with Disaster Tweets](https://www.kaggle.com/competitions/nlp-getting-started) [#NLP]() [#BinaryClassification]()
-9. [Forecasting Sticker Sales](https://www.kaggle.com/competitions/playground-series-s5e1) [#TimeSeries]() [#Regression]()
-10. [Steel Plate Defect Prediction](https://www.kaggle.com/competitions/playground-series-s4e3) [#MultiClassClassiification]()
+1. [Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) 		[#imbalanced]() [#BinaryClassification]()
+2. [Predict the LLM](https://www.kaggle.com/competitions/h2oai-predict-the-llm) where I fine-tuned a Mistral-7B model 		[#NLP]() [#MultiClassClassiification]()
+3. [House Price Prediction](https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques) 		[#Regression]()
+4. [Quora Question Pair](https://www.kaggle.com/competitions/quora-question-pairs) 		[#NLP]() [#Regression]()
+5. [Santander Product Recommendation](https://www.kaggle.com/c/santander-product-recommendation)		[#RecommenderSystem]() [#MultiClassClassification]()
+6. [Toxic Comment Classification](https://www.kaggle.com/competitions/jigsaw-multilingual-toxic-comment-classification/overview) 		[#NLP]() [#Regression]()
+7. [Home Credit Default Risk](https://www.kaggle.com/competitions/home-credit-default-risk) 		[#Regression]()
+8. [NLP with Disaster Tweets](https://www.kaggle.com/competitions/nlp-getting-started) 		[#NLP]() [#BinaryClassification]()
+9. [Forecasting Sticker Sales](https://www.kaggle.com/competitions/playground-series-s5e1) 		[#TimeSeries]() [#Regression]()
+10. [Steel Plate Defect Prediction](https://www.kaggle.com/competitions/playground-series-s4e3) 		[#MultiClassClassiification]()
 
 # Published Articles
 1. [Santander Product Recommendation](https://medium.com/@ravitee/santander-product-recommendation-ee4122d15072)
