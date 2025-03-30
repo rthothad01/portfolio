@@ -4,7 +4,7 @@
 ## LLM Projects - RAG
 
 ### Financial Chat assistant
-- Developed a chat assistant to chat with Raymond James' 1Q25 Results that had lot of charts. The goal was to bring the relevant chart while answering the questions.
+- Developed a chat assistant to chat with Raymond James' 1Q25 Results (any PDF can be used) that had lot of charts. The goal was to bring the relevant chart while answering the questions.
 1. Used OpenAI's text-embedding-3-large model to capture nuanced semantic meanings.
 2. Used Llamaparse to extract text and images, using OpenAI's multimodal LLM, gpt-40
 3. Mapped text and image using LlamaIndex's data structure, TextNode.
