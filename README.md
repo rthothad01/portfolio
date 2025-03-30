@@ -17,7 +17,7 @@
 3. Uses similarity ranking to rank the fetched news articles against the hypothetical answers.
 4. Returns the top n news articles.
 
-### Financial Analyst Agents
+### Financial Analyst Agent
 - Developed a financial analyst to do sentiment analysis and trend analysis on the market data.
 1. Used crewai for orchestration.
 2. Build 2 agents, one to act as a Financial News Analyst, whose role is collect and analyze financial news article to identify sentiment.
