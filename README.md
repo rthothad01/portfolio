@@ -86,5 +86,9 @@
 2. [Portfolio Optimization using Principal Component Analysis](https://medium.com/@ravitee/portfolio-optimization-using-principal-component-analysis-923f102a8a47)
 3. [A Primer on AI Agents](https://medium.com/@ravitee/a-primer-about-ai-agents-1e34f6dc7a4d)
 
+# Certifications
+AWS Certified Machine Learning - Speciality
+AWS Certified Cloud Practitioner
+
 # Contact
 ravi.thothadri@hotmail.com
