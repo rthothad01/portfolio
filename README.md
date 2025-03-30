@@ -34,7 +34,7 @@
 6. [Toxic Comment Classification](https://www.kaggle.com/competitions/jigsaw-multilingual-toxic-comment-classification/overview) [#NLP #Regression]()
 7. [Home Credit Default Risk](https://www.kaggle.com/competitions/home-credit-default-risk) [#Regression]()
 8. [NLP with Disaster Tweets](https://www.kaggle.com/competitions/nlp-getting-started) [#NLP #BinaryClassification]()
-9. [Forecasting Sticker Sales](https://www.kaggle.com/competitions/playground-series-s5e1) [#TimeSeries #Regression]
+9. [Forecasting Sticker Sales](https://www.kaggle.com/competitions/playground-series-s5e1) [#TimeSeries #Regression]()
 10. [Steel Plate Defect Prediction](https://www.kaggle.com/competitions/playground-series-s4e3) [#MultiClassClassiification]()
 
 # Published Articles
