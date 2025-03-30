@@ -2,6 +2,27 @@
 # Portfolio
 
 ## LLM Projects
+### Financial Chat assistant
+- Developed a chat assistant to chat with Raymond James' 1Q25 Results that had lot of charts. The goal was to bring the relevant chart while answering the questions.
+1. Used OpenAI's text-embedding-3-large, which would help capture nuaned semantic meanings.
+2. Used Llamaparse to extract text and images, using OpenAI's multimodal LLM, gpt-40
+3. Mapped text and image using LlamaIndex's data structure, TextNode.
+4. Created custom report output to output both Text and Image blocks for the query.
+5. Used gpt-4o to query.
+
+### Retrieve News Articles using Hypothetical Answers
+- Developed a News assistant to answer broad-themed questions such as "What impact does the anti-trust case against google have on its long term value?"
+1. Uses LLM to answer to generate 10 different questions for the user question and have the LLM generate hypothetical answers.
+2. Fetches news articles for the ticker using newsapi.org.
+3. Uses similarity ranking to rank the fetched news articles against the hypothetical answers.
+4. Returns the top n news articles.
+
+### Financial Analyst Agents
+- Developed a financial analyst to do sentiment analysis and trend analysis on the market data.
+1. Used crewai for orchestration.
+2. Build 2 agents, one to act as a Financial News Analyst, whose role is collect and analyze financial news article to identify sentiment.
+3. Second agent, acts as a Data Analyst, who role is to analyze historical market data to identify trends.
+
 ### Study Assistant
 - Developed a Study Assistant using LangChain that:
 1. Summarizes study material into concise points.
