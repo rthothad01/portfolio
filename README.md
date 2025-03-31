@@ -13,7 +13,7 @@
 5. Used gpt-4o to query.
 
 <!-- Google drive - Hypothetical Answers-->
-### Retrieve News Articles using Hypothetical Answers
+### Retrieve News Articles using Hypothetical Answers/HyDE
 - Developed a News assistant to answer broad-themed questions such as "What impact does the anti-trust case against google have on its long term value?"
 1. Used LLM to generate 10 different questions for the user question and LLM to generate hypothetical answers for those questions.
 2. Fetched news articles for the ticker using newsapi.org.
@@ -21,7 +21,7 @@
 4. Returned the top n news articles.
 
 <!-- Google drive-->
-### Financial Analyst Agent
+### Financial Analyst Agent (Agentic AI)
 - Developed a financial analyst to do sentiment and trend analysis on the market data for a provided ticker.
 1. Used crewai for orchestration.
 2. Built 2 agents, one to act as a Financial News Analyst, whose role is to collect and analyze financial news article to identify sentiment (and).
@@ -47,7 +47,7 @@
 		4. Chained Retrieval Pipeline, which inlcudes basic retrieval strategies such as cosine similarity, filtering out noise using LLM chain filtering compression and then use HF's BGE re-ranker model to re-rank the results.
 
 <!-- Refer to TechNotes git's LLM/Agentic AI Course/5.Notebooks.7 -->
-### Evaluate Generated Content
+### Content Evaluation
 - Used RAGAS and DeepEval to evaluate context that was retrieved and the response provided.
 	1. Used ContextualPrecisionMetric ContextualRecallMetric and ContextualRelevancyMetric to evaluate the context retrieved.
 	2. Used AnswerRelevancyMetric, with both a LLM and a similarity based approach, using RAGA framework to evaluate the response.
@@ -55,15 +55,15 @@
 ## LLM Projects - Fine Tuning
 <!-- Kaggle -->
 ### Sentiment Analysis for Financial News
-- Built a fine-tuned model to predict the sentiment of the news article and recevied a **gold star** for the [notebook](https://www.kaggle.com/code/ravitee/sentiment-analysis-on-financial-news-using-llama2/notebook) I published in Kaggle.
+- Built a supervised fine-tuned (SFT) model to predict sentiment of the news article and recevied a **gold star** for the [notebook](https://www.kaggle.com/code/ravitee/sentiment-analysis-on-financial-news-using-llama2/notebook) I published in Kaggle.
 1. Used accelerate, peft, bitsandbytes, transformers and trl libraries to fine tune a llama-2 base model.
 2. Used float16 data type for computations and retrained the non-linear layer of the base model.
 
 <!-- Kaggle -->
-### Predict the LLM
-- Built a multi-class classification model to predict the LLM that produced the test data. Dataset can be found in [Kaggle](https://www.kaggle.com/competitions/h2oai-predict-the-llm)
+### LLM Prediction Model
+- Built a multi-class classification model (SFT) to predict the LLM that produced the test data. Dataset can be found in [Kaggle](https://www.kaggle.com/competitions/h2oai-predict-the-llm)
 1. Used accelerate, peft, bitsandbytes, transformers to fine tune Mistral-7B.
-2. Used Weights & Biases to store the training/trial runs.
+2. Used Weights & Biases for experiment tracking.
 3. Used Lora to target re-training of attention blocks.
 4. Used k-bit training, which reduces memory footprint, to improve training speed
 
@@ -87,7 +87,7 @@
 3. [A Primer on AI Agents](https://medium.com/@ravitee/a-primer-about-ai-agents-1e34f6dc7a4d)
 
 # Certifications
-AWS Certified Machine Learning - Speciality
+AWS Certified Machine Learning - Specialty
 AWS Certified Cloud Practitioner
 
 # Contact
