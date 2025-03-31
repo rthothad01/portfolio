@@ -87,8 +87,8 @@
 3. [A Primer on AI Agents](https://medium.com/@ravitee/a-primer-about-ai-agents-1e34f6dc7a4d)
 
 # Certifications
-AWS Certified Machine Learning - Specialty
-AWS Certified Cloud Practitioner
+1. AWS Certified Machine Learning - Specialty
+2. AWS Certified Cloud Practitioner
 
 # Contact
 ravi.thothadri@hotmail.com
