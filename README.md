@@ -26,15 +26,29 @@
 1. Used crewai for orchestration.
 2. Built 2 agents, one to act as a Financial News Analyst, whose role is to collect and analyze financial news article to identify sentiment (and).
 3. Another agent to act as a Data Analyst, whose role is to analyze historical market data to identify trends.
+<!-- Refer to TechNotes git's LLM/Agentic AI/BuildingAIAgentswithLangChain/notebooks/Module5/M5_Build_a_Financial_Analyst_ReAct_Agentic_AI_System_with_LangChain.ipynb-->
+### Financial Analyst Agent (ReAct Based Agent)
+Created an updated version of the above and converted it to a ReAct based agent with 2 flows. One to get information about specific stocks and another flow to get information general market information. Used GPT-4o, which helps with function calling and LangChain/LangGraph
 
-<!-- Refer to TechNotes git's LLM/Agentic AI Course/4.6 Assignment -->
+The available tools are listed below. Used OpenBB to integrate with different data providers to get required data.
+- GET_STOCK_TICKER: Validates and fetches stock tickers based on user queries. Integrated with OpenBB to get this data from SEC. The integration helps convert say NVIDIA to NVDA.
+- GET_STOCK_PRICE_METRICS: Retrieves current price, historical price and performance data for specific stocks. This was also integrated with OpenBB and used CBOE to get price data, finviz to get performance data and yfinance for historical price.
+- GET_STOCK_NEWS: Extracts recent news articles related to stocks or markets. Used tmx provider via OpenBB to get his information.
+- GET_STOCK_FUNDAMENTAL_INDICATOR_METRICS: Provides insights into financial indicators like P/E ratio, ROE, etc. Integrated with OpenBB's fundamental and ratios metrics
+- GET_GENERAL_MARKET_DATA: Fetches general market trends and data for the whole market such as most actively traded stocks based on volume, top gainers and top losers. Used yfinance to get the data.
+
+This will help answer questions such as 
+1. How is the market doing today?
+2. Is it the right time to invest in NVDA?
+
+<!-- Refer to TechNotes git's LLM/Agentic AI/4.6 Assignment -->
 ### Study Assistant
 - Developed a Study Assistant using LangChain that:
 1. Summarizes study material into concise points.
 2. Automatically generates multiple-choice quiz questions based on the summarized content.
 3. Functions without the need for external retrieval mechanisms or vector database.
 
-<!-- Refer to TechNotes git's LLM/Agentic AI Course/5.Notebooks.5 -->
+<!-- Refer to TechNotes git's LLM/Agentic AI/5.Notebooks.5 -->
 ### Search engine retriever
 - Built a search engine on Wikipedia articles & some research papers such as Attention is all you need
 	1. Processed both text and PDF documents using LangChain
@@ -46,7 +60,7 @@
 		3. Contextual Compression Retrieval to filter out irrelevant information.
 		4. Chained Retrieval Pipeline, which inlcudes basic retrieval strategies such as cosine similarity, filtering out noise using LLM chain filtering compression and then use HF's BGE re-ranker model to re-rank the results.
 
-<!-- Refer to TechNotes git's LLM/Agentic AI Course/5.Notebooks.7 -->
+<!-- Refer to TechNotes git's LLM/Agentic AI/5.Notebooks.7 -->
 ### Content Evaluation
 - Used RAGAS and DeepEval to evaluate context that was retrieved and the response provided.
 	1. Used ContextualPrecisionMetric ContextualRecallMetric and ContextualRelevancyMetric to evaluate the context retrieved.
