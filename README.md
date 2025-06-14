@@ -41,6 +41,8 @@ This will help answer questions such as
 1. How is the market doing today?
 2. Is it the right time to invest in NVDA?
 
+The key benefit of an agentic financial analyst is to provide quick access to multi-source financial data and insights.
+
 <!-- Refer to TechNotes git's LLM/Agentic AI/4.6 Assignment -->
 ### Study Assistant
 - Developed a Study Assistant using LangChain that:
