@@ -7,7 +7,7 @@
 ### Financial Chat assistant 
 - Developed a chat assistant to chat with [Raymond James' 1Q25 Results](https://www.raymondjames.com/-/media/rj/dotcom/files/our-company/news-and-media/2025-press-releases/rjf20250129-1q-presentation.pdf) (any PDF can be used) that had lot of charts. The goal was to bring the relevant chart while answering the questions.
 1. Used OpenAI's text-embedding-3-large model to capture nuanced semantic meanings.
-2. Used Llamaparse to extract text and images, using OpenAI's multimodal LLM, gpt-40
+2. Used Llamaparse to extract text and images, using OpenAI's multimodal LLM, gpt-4o
 3. Mapped text and image using LlamaIndex's data structure, TextNode.
 4. Created custom report output to output both Text and Image blocks for the query.
 5. Used gpt-4o to query.
@@ -35,7 +35,7 @@
 <!-- Refer to TechNotes git's LLM/Agentic AI/5.Notebooks.7 -->
 ### Content Evaluation
 - Used RAGAS and DeepEval to evaluate context that was retrieved and the response provided.
-	1. Used ContextualPrecisionMetric ContextualRecallMetric and ContextualRelevancyMetric to evaluate the context retrieved.
+	1. Used ContextualPrecisionMetric,  ContextualRecallMetric and ContextualRelevancyMetric to evaluate the context retrieved.
 	2. Used AnswerRelevancyMetric, with both a LLM and a similarity based approach, using RAGA framework to evaluate the response.
    
 ## LLM Projects - Agentic AI
@@ -47,12 +47,12 @@
 3. Another agent to act as a Data Analyst, whose role is to analyze historical market data to identify trends.
 <!-- Refer to TechNotes git's LLM/Agentic AI/BuildingAIAgentswithLangChain/notebooks/Module5/M5_Build_a_Financial_Analyst_ReAct_Agentic_AI_System_with_LangChain.ipynb-->
 ### Financial Analyst Agent (ReAct Based Agent)
-Created an updated version of the above and converted it to a ReAct based agent with 2 flows. One to get information about specific stocks and another flow to get information general market information. Used GPT-4o, which helps with function calling and LangChain/LangGraph
+Created an updated version of the above and converted it to a ReAct based agent with 2 flows. One to get information about specific stocks and another flow to get general market information. Used GPT-4o, which helps with function calling and LangChain/LangGraph
 
-The available tools are listed below. Used OpenBB to integrate with different data providers to get required data.
-- GET_STOCK_TICKER: Validates and fetches stock tickers based on user queries. Integrated with OpenBB to get this data from SEC. The integration helps convert say NVIDIA to NVDA.
+The tools built are listed below. Used OpenBB to integrate with different data providers to get required data.
+- GET_STOCK_TICKER: Validates and fetches stock tickers based on user queries. Integrated with OpenBB to get this data from SEC. This integration also helps convert say NVIDIA to NVDA.
 - GET_STOCK_PRICE_METRICS: Retrieves current price, historical price and performance data for specific stocks. This was also integrated with OpenBB and used CBOE to get price data, finviz to get performance data and yfinance for historical price.
-- GET_STOCK_NEWS: Extracts recent news articles related to stocks or markets. Used tmx provider via OpenBB to get his information.
+- GET_STOCK_NEWS: Extracts recent news articles related to stocks or markets. Used tmx provider via OpenBB to get this information.
 - GET_STOCK_FUNDAMENTAL_INDICATOR_METRICS: Provides insights into financial indicators like P/E ratio, ROE, etc. Integrated with OpenBB's fundamental and ratios metrics
 - GET_GENERAL_MARKET_DATA: Fetches general market trends and data for the whole market such as most actively traded stocks based on volume, top gainers and top losers. Used yfinance to get the data.
 
