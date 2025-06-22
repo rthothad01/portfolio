@@ -6,11 +6,15 @@
 <!-- Refer to TechNotes git's LLM/RAG/LlamaIndex folder -->
 ### Financial Chat assistant 
 - Developed a chat assistant to chat with [Raymond James' 1Q25 Results](https://www.raymondjames.com/-/media/rj/dotcom/files/our-company/news-and-media/2025-press-releases/rjf20250129-1q-presentation.pdf) (any PDF can be used) that had lot of charts. The goal was to bring the relevant chart while answering the questions.
-1. Used OpenAI's text-embedding-3-large model to capture nuanced semantic meanings.
+1. Used OpenAI's text-embedding-3-large model that creates embeddings with up to 3072 dimensions to capture nuanced semantic meanings.
 2. Used Llamaparse to extract text and images, using OpenAI's multimodal LLM, gpt-4o
-3. Mapped text and image using LlamaIndex's data structure, TextNode.
+3. Mapped text and image for each page using LlamaIndex's data structure, TextNode.
 4. Created custom report output to output both Text and Image blocks for the query.
 5. Used gpt-4o to query.
+6. Some of the questions I tried are:
+   1. Give me a summary of the financial performance of the different business units.
+   2. Give me a summary of whether you think the financial projections are stable, and if not, what are the potential risk factors. Support your research with sources.
+   3. What is the Net Interest Income for the current quarter? How does it compare to the previous quarter and the previous year? Support your research with sources.
 
 <!-- Google drive - Hypothetical Answers-->
 ### Retrieve News Articles using Hypothetical Answers/HyDE
@@ -20,19 +24,19 @@
 3. Used similarity ranking to rank the fetched news articles against the hypothetical answers.
 4. Returned the top n news articles.
 
-<!-- Refer to TechNotes git's LLM/Agentic AI/5.Notebooks.5 -->
+<!-- Refer to git's LLM/Agentic AI/5.Notebooks.5 -->
 ### Search engine retriever
 - Built a search engine on Wikipedia articles & some research papers such as Attention is all you need
 	1. Processed both text and PDF documents using LangChain
-	2. Created Document and Contextual Chunks using Recursive Character Text Splits & Chunking strategy and also used Contextual Chunking with the help of gpt4o-mini
+	2. Created Document and Contextual Chunks using Recursive Character Text Splits & Chunking strategy and also used Contextual Chunking with the help of gpt4o-mini. The idea here is to split a huge document into managable chunks and store a summary for each chunk that can be used during retrieval.
 	3. Indexed Chunks and embeddings in a chroma vector database using Langchain
-	4. Experimented with different retrievers listed below
+	4. Experimented with different retrievers listed below with questions such as What is the difference between transformers and vision transformers?, What is a cnn?
 		1. Similarity based Retrieval
-		2. Multi Query Retrieval to rephrase the question in different ways using gpt4o-mini. For a question about CNN, was able to get back documents related to CNN, the cable news channel and CNN, the convolutional neural network.
-		3. Contextual Compression Retrieval to filter out irrelevant information.
-		4. Chained Retrieval Pipeline, which inlcudes basic retrieval strategies such as cosine similarity, filtering out noise using LLM chain filtering compression and then use HF's BGE re-ranker model to re-rank the results.
+		2. Multi Query Retrieval to rephrase the question in different ways using gpt4o-mini to overcome the issue when subtle changes in query wording yield different results. This is akin to automating prompt engineering. For a question about what is a CNN, generated similar quesitons such as 'What does CNN stand for and what are its main functions?  ', 'Can you explain the concept and applications of a convolutional neural network?  ', 'What are the key features and uses of CNNs in machine learning?.
+		3. Contextual Compression Retrieval to filter out irrelevant information. The information most relevant to a query may be buried in a document with a lot of irrelevant text. Passing that full document through the application can lead to more expensive LLM calls and poorer responses. After retrieving the documents passed it througn LLMChainFilter to retrieve relevant documents.
+		4. Chained Retrieval Pipeline, which inlcudes basic retrieval strategies such as cosine similarity, filtering out noise using LLM chain filtering compression (as mentioned above) and then use HuggingFace's BGE re-ranker model to re-rank the results.
 
-<!-- Refer to TechNotes git's LLM/Agentic AI/5.Notebooks.7 -->
+<!-- Refer to git's LLM/Agentic AI/5.Notebooks.7 -->
 ### Content Evaluation
 - Used RAGAS and DeepEval to evaluate context that was retrieved and the response provided.
 	1. Used ContextualPrecisionMetric,  ContextualRecallMetric and ContextualRelevancyMetric to evaluate the context retrieved.
@@ -68,6 +72,7 @@ The key benefit of an agentic financial analyst is to provide quick access to mu
 1. Summarizes study material into concise points.
 2. Automatically generates multiple-choice quiz questions based on the summarized content.
 3. Functions without the need for external retrieval mechanisms or vector database.
+   Used LangChain's ChatPromptTemplate and LangChain Expression Language to chain the prompt, LLM and the output parser.
 	
 ## LLM Projects - Fine Tuning
 <!-- Kaggle -->
