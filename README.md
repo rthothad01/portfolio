@@ -111,6 +111,8 @@ The key benefit of an agentic financial analyst is to provide quick access to mu
 # Certifications
 1. AWS Certified Machine Learning - Specialty
 2. AWS Certified Cloud Practitioner
+3. Securities Industry Essentials from FINRA
+4. Deep Learning Specialization from Coursera
 
 # Contact
 ravi.thothadri@hotmail.com
