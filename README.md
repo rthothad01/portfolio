@@ -65,6 +65,19 @@ This will help answer questions such as
 2. Is it the right time to invest in NVDA?
 
 The key benefit of an agentic financial analyst is to provide quick access to multi-source financial data and insights.
+### Financial Analyst Agent (Strands Agent)
+Converted the above to a modular FastAPI application for financial analysis, powered by Strands Agent and AWS Bedrock.
+## Features
+- Financial data analysis using Strands Agent
+- AWS Bedrock agent runtime integration
+- Containerized deployment ready for AWS ECR
+- Environment-based configuration
+
+## Tech Stack
+- FastAPI
+- AWS Bedrock
+- Strands Agent
+- Docker
 
 <!-- Refer to TechNotes git's LLM/Agentic AI/4.6 Assignment -->
 ### Study Assistant
