@@ -4,8 +4,12 @@
 ## LLM Projects - RAG
 
 <!-- Refer to TechNotes git's LLM/RAG/LlamaIndex folder -->
-### Financial Chat assistant 
-- Developed a chat assistant to chat with [Raymond James' 1Q25 Results](https://www.raymondjames.com/-/media/rj/dotcom/files/our-company/news-and-media/2025-press-releases/rjf20250129-1q-presentation.pdf) (any PDF can be used) that had lot of charts. The goal was to bring the relevant chart while answering the questions.
+<!-- https://github.com/rthothad01/LLM/blob/0166c7218b10cdede425a4242057c107ae9f8b94/RAG/LlamaIndex/FinancialChatAssistant(with%20charts).ipynb-->
+
+### Financial Chat assistant
+
+Developed a chat assistant to chat with [Raymond James' 1Q25 Results](https://www.raymondjames.com/-/media/rj/dotcom/files/our-company/news-and-media/2025-press-releases/rjf20250129-1q-presentation.pdf) (any PDF can be used) that had lot of charts. The goal was to bring the relevant chart while answering the questions.
+
 1. Used OpenAI's text-embedding-3-large model that creates embeddings with up to 3072 dimensions to capture nuanced semantic meanings.
 2. Used Llamaparse to extract text and images, using OpenAI's multimodal LLM, gpt-4o
 3. Mapped text and image for each page using LlamaIndex's data structure, TextNode.
@@ -18,7 +22,9 @@
 
 <!-- Google drive - Hypothetical Answers-->
 ### Retrieve News Articles using Hypothetical Answers/HyDE
+
 - Developed a News assistant to answer broad-themed questions such as "What impact does the anti-trust case against google have on its long term value?"
+  
 1. Used LLM to generate 10 different questions for the user question and LLM to generate hypothetical answers for those questions.
 2. Fetched news articles for the ticker using newsapi.org.
 3. Used similarity ranking to rank the fetched news articles against the hypothetical answers.
@@ -26,7 +32,9 @@
 
 <!-- Refer to git's LLM/Agentic AI/5.Notebooks.5 -->
 ### Search engine retriever
+
 - Built a search engine on Wikipedia articles & some research papers such as Attention is all you need
+
 	1. Processed both text and PDF documents using LangChain
 	2. Created Document and Contextual Chunks using Recursive Character Text Splits & Chunking strategy and also used Contextual Chunking with the help of gpt4o-mini. The idea here is to split a huge document into managable chunks and store a summary for each chunk that can be used during retrieval.
 	3. Indexed Chunks and embeddings in a chroma vector database using Langchain
