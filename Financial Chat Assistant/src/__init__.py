@@ -10,6 +10,7 @@ from .models import (
     ImageBlock,
     SYSTEM_PROMPT
 )
+from .document_processor import DocumentProcessor
 
 __version__ = "1.0.0"
 __all__ = [
@@ -19,5 +20,6 @@ __all__ = [
             "ReportOutput",
             "TextBlock",
             "ImageBlock",
-            "SYSTEM_PROMPT"
+            "SYSTEM_PROMPT",
+            "DocumentProcessor"
             ]

@@ -1,6 +1,6 @@
 """FastAPI application for Financial Chat Assistant"""
 
-import logging
+import logging, sys
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -13,8 +13,11 @@ from .health_check import router as health_check_router
 # Setup logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+     handlers=[
+        logging.StreamHandler(sys.stdout)  # Output to console
+    ])
+
 logger = logging.getLogger(__name__)
 
 # Global configuration

@@ -17,3 +17,4 @@ text = TextBlock(text="This is a sample text block for testing.")
 report = ReportOutput(blocks=[text])
 
 print(report.get_stats())
+print("✓ Models work correctly")

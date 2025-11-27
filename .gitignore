@@ -1,2 +1,4 @@
 Financial Chat Assistant/src/.env
 Financial Chat Assistant/src/__pycache__
+data/images
+Financial Chat Assistant/tests/data/images
