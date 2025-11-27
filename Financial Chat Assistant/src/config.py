@@ -50,8 +50,8 @@ class Config:
     # Directories
     project_root: Path = field(default_factory=lambda: Path(__file__).parent.parent)
     data_dir: Path = field(default_factory=lambda: Path("data"))
-    images_dir: Path = field(default_factory=lambda: Path("data_images"))
-    storage_dir: Path = field(default_factory=lambda: Path("storage_nodes_summary"))
+    images_dir: Path = field(default_factory=lambda: Path("data\images"))
+    storage_dir: Path = field(default_factory=lambda: Path("data\storage_nodes_summary"))
     cache_dir: Path = field(default_factory=lambda: Path("cache"))
     
     # Model Configuration
