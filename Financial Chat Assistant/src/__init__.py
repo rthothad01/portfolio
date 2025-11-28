@@ -11,6 +11,7 @@ from .models import (
     SYSTEM_PROMPT
 )
 from .document_processor import DocumentProcessor
+from .indexing import DocumentUtils, IndexBuilder
 
 __version__ = "1.0.0"
 __all__ = [
@@ -21,5 +22,7 @@ __all__ = [
             "TextBlock",
             "ImageBlock",
             "SYSTEM_PROMPT",
-            "DocumentProcessor"
+            "DocumentProcessor",
+            "DocumentUtils",
+            "IndexBuilder"
             ]
