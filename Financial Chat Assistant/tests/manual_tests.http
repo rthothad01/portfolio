@@ -5,6 +5,8 @@ GET http://localhost:8080/ping
 GET http://localhost:8080/health
 Accept: application/json
 
+### Test 3: Open Swagger docs
+GET http://localhost:8080/docs
 
 # ### Test 3: Empty Prompt (Should Fail)
 # POST http://localhost:8080/invocations

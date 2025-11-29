@@ -6,7 +6,8 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 print(f"Project root - {project_root} added to sys.path:")
 
-from src import Config, DocumentProcessor
+from src import Config, DocumentProcessor, DocumentUtils, IndexBuilder, QueryEngineBuilder
+print("✓ Imports work correctly")
 
 # Setup logging
 # Remove all existing handlers
@@ -27,7 +28,7 @@ print("🔧 Logging configured successfully! - from print statement")
 logger.info("🔧 Logging configured successfully!")
 logger.info("=" * 60)
 
-
+# Process document
 config = Config()
 processor = DocumentProcessor(config)
 print("✓ DocumentProcessor initialized successfully")
@@ -42,12 +43,34 @@ project_root = config.project_root
 data_dir = project_root / config.data_dir 
 pdf_file="RJF20250129 1Q Presentation.pdf"
 file_path = data_dir.joinpath(pdf_file)
+logger.info(f"Processing file at {file_path}")
+
 result = processor.process_document(file_path=file_path)
 
 if result:
     pages, images_dir = result
-    summary = processor.get_page_summary(pages)
     print("✓ Document processing successful")
-    print(f"Summary: {summary}")
-else:
-    print("✗ Document processing failed")
+    
+    # Create text nodes
+    text_nodes = DocumentUtils.create_text_nodes(pages, images_dir)
+    print(f"✓ Created {len(text_nodes)} text nodes")
+    
+    # Build index
+    index_builder = IndexBuilder(config)
+    index = index_builder.build_index(text_nodes)
+    print(f"✓ Built index with {len(text_nodes)} nodes")
+
+    # Create query engine
+    qe_builder = QueryEngineBuilder(config)
+    query_engine = qe_builder.create_query_engine(index)
+    print("✓ Query engine created successfully")
+
+    # Test query
+    query="What is the Net Interest Income for Q1 2025?"
+    response = qe_builder.query(query)
+    if response:
+        print("✓ Query executed successfully")
+        print(f"Query: {query}")
+        print(f"Blocks: {response.get_stats()}")
+    else:
+        print("✗ Query execution failed")

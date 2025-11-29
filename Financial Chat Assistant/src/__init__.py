@@ -12,6 +12,7 @@ from .models import (
 )
 from .document_processor import DocumentProcessor
 from .indexing import DocumentUtils, IndexBuilder
+from .query_engine import QueryEngineBuilder
 
 __version__ = "1.0.0"
 __all__ = [
@@ -24,5 +25,6 @@ __all__ = [
             "SYSTEM_PROMPT",
             "DocumentProcessor",
             "DocumentUtils",
-            "IndexBuilder"
+            "IndexBuilder",
+            "QueryEngineBuilder"
             ]

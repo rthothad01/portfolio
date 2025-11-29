@@ -11,6 +11,10 @@ from .app_state import initialize_config
 from .health_check import router as health_check_router
 
 # Setup logging
+# Remove all existing handlers
+for handler in logging.root.handlers[:]:
+    logging.root.removeHandler(handler)
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -19,6 +23,11 @@ logging.basicConfig(
     ])
 
 logger = logging.getLogger(__name__)
+# Test it immediately
+logger.info("=" * 60)
+print("🔧 Logging configured successfully! - from print statement")
+logger.info("🔧 Logging configured successfully!")
+logger.info("=" * 60)
 
 # Global configuration
 app_config = None
