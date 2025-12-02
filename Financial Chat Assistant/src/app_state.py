@@ -7,12 +7,18 @@ Separated from main.py to avoid circular imports.
 import logging
 from typing import Optional
 from .config import Config
+from .indexing import IndexBuilder
+from .query_engine import QueryEngineBuilder
 
 logger = logging.getLogger(__name__)
 
-# Global configuration instance
-_app_config: Optional[Config] = None
-
+# Global state
+_app_state = {
+    "config": None,
+    "query_engine": None,
+    "index_builder": None,
+    "query_builder": None,
+}
 
 def initialize_config() -> Config:
     """
@@ -23,21 +29,22 @@ def initialize_config() -> Config:
     Returns:
         Config: The initialized configuration
     """
-    global _app_config
-    
     logger.info("📋 Loading configuration...")
     
-    _app_config = Config()
-    _app_config.setup_directories()
+    config = Config()
+    config.setup_directories()
+
+     # Store in global state
+    _app_state["config"] = config
     
     logger.info("✅ Configuration loaded successfully!")
-    logger.info(f"   - LLM Model: {_app_config.llm_model}")
-    logger.info(f"   - Embedding Model: {_app_config.embedding_model}")
-    logger.info(f"   - Data Directory: {_app_config.data_dir}")
-    logger.info(f"   - OpenAI API Key: {'*' * 20}{_app_config.openai_api_key[-4:]}")
-    logger.info(f"   - LlamaParse API Key: {'*' * 20}{_app_config.llamaparse_api_key[-4:]}")
+    logger.info(f"   - LLM Model: {config.llm_model}")
+    logger.info(f"   - Embedding Model: {config.embedding_model}")
+    logger.info(f"   - Data Directory: {config.data_dir}")
+    logger.info(f"   - OpenAI API Key: {'*' * 20}{config.openai_api_key[-4:]}")
+    logger.info(f"   - LlamaParse API Key: {'*' * 20}{config.llamaparse_api_key[-4:]}")
     
-    return _app_config
+    return config
 
 
 def get_config() -> Config:
@@ -50,22 +57,31 @@ def get_config() -> Config:
     Raises:
         RuntimeError: If configuration not initialized
     """
-    global _app_config
-    
-    if _app_config is None:
-        raise RuntimeError(
-            "Configuration not initialized. "
-            "App may not have started properly."
-        )
-    
-    return _app_config
+    config = _app_state.get("config")
+    if config is None:
+        raise RuntimeError("Configuration not initialized")
+    return config
 
-
-def is_config_initialized() -> bool:
+def get_app_state():
     """
-    Check if configuration has been initialized
+    Get the global application state dictionary
     
     Returns:
-        bool: True if config is initialized, False otherwise
+        dict: Application state
     """
-    return _app_config is not None
+    return _app_state
+
+def set_query_engine(query_engine, index_builder, query_builder):
+    """
+    Set query engine and related components in global state
+    
+    Args:
+        query_engine: Query engine instance
+        index_builder: Index builder instance
+        query_builder: Query builder instance
+    """
+    _app_state["query_engine"] = query_engine
+    _app_state["index_builder"] = index_builder
+    _app_state["query_builder"] = query_builder
+    
+    logger.info("✓ Query engine components stored in global state")

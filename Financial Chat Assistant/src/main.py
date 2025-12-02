@@ -6,9 +6,19 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
-from .app_state import initialize_config
+from llama_index.core import StorageContext, load_index_from_storage
+import uvicorn
 
-from .health_check import router as health_check_router
+from .app_state import initialize_config, get_app_state, set_query_engine
+
+from src import Config, DocumentProcessor, DocumentUtils, IndexBuilder
+from src import QueryEngineBuilder, QueryRequest, QueryResponse, ReportOutput
+
+from .routers import (
+    health_check_router,
+    document_router,
+    query_router
+)
 
 # Setup logging
 # Remove all existing handlers
@@ -29,30 +39,62 @@ print("🔧 Logging configured successfully! - from print statement")
 logger.info("🔧 Logging configured successfully!")
 logger.info("=" * 60)
 
-# Global configuration
-app_config = None
+# Get reference to Global state
+app_state = get_app_state()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
     Lifecycle manager for the FastAPI app
-    Loads configuration on startup
+    Initializes resources on startup and cleans up on shutdown
     """
-    global app_config
-    
-    # Startup: Load configuration
+    # Startup
+    logger.info("=" * 60)
     logger.info("🚀 Starting Financial Chat Assistant API")
+    logger.info("=" * 60)
     
     try:
-        initialize_config()
+        # ✅ Initialize config using app_state module
+        config = initialize_config()
+        
+        # Check if index exists
+        if config.storage_dir.exists():
+            logger.info("📚 Loading existing index...")
+            
+            try:
+                storage_context = StorageContext.from_defaults(
+                    persist_dir=str(config.storage_dir)
+                )
+                index = load_index_from_storage(
+                    storage_context,
+                    index_id="summary_index"
+                )
+                
+                # Create query components
+                query_builder = QueryEngineBuilder(config)
+                query_engine = query_builder.create_query_engine(index)
+                index_builder = IndexBuilder(config)
+                
+                # ✅ Store using helper function
+                set_query_engine(query_engine, index_builder, query_builder)
+                
+                logger.info("✓ Index loaded successfully")
+                
+            except Exception as e:
+                logger.warning(f"⚠️  Failed to load index: {e}")
+        else:
+            logger.warning("⚠️  No index found")
+            logger.info("→ Use /document/process to process a document")
+        
     except Exception as e:
-        logger.error(f"❌ Failed to load configuration: {e}")
-        raise
+        logger.error(f"❌ Initialization failed: {e}", exc_info=True)
     
     yield
     
     # Shutdown
-    logger.info("👋 Shutting down Financial Chat Assistant API")
+    logger.info("=" * 60)
+    logger.info("👋 Shutting down")
+    logger.info("=" * 60)
 
 app = FastAPI(
     title="Financial Chat Assistant API",
@@ -64,15 +106,18 @@ app = FastAPI(
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"], #  Adjust as needed for production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # Include routers
-app.include_router(health_check_router)      # ← NEW: Health check endpoints
+app.include_router(health_check_router)
+app.include_router(document_router)
+app.include_router(query_router)
 
+logger.info("✓ Routers registered")
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
@@ -182,3 +227,22 @@ async def root():
     """
     return HTMLResponse(content=html_content)
 
+def start_server(host: str = "0.0.0.0", port: int = 8000, reload: bool = False):
+    """
+    Start the FastAPI server
+    
+    Args:
+        host: Host to bind to
+        port: Port to bind to
+        reload: Enable auto-reload for development
+    """
+    uvicorn.run(
+        "src.main:app",
+        host=host,
+        port=port,
+        reload=reload,
+        log_level="info"
+    )
+
+if __name__ == "__main__":
+    start_server(reload=True)

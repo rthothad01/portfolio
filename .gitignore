@@ -2,3 +2,6 @@ Financial Chat Assistant/src/.env
 Financial Chat Assistant/src/__pycache__
 data/images
 Financial Chat Assistant/tests/data
+Financial Chat Assistant/data/images
+Financial Chat Assistant/data/storage_nodes_summary
+Financial Chat Assistant/src/routers/__pycache__

@@ -1,19 +1,177 @@
+###############################################
+# Financial Chat Assistant API Tests
+# Base URL: http://localhost:8080
+###############################################
+# cd project-root-directory
+# python run_api.py
+
+@baseUrl = http://localhost:8080
+@pdfUrl = https://www.raymondjames.com/-/media/rj/dotcom/files/our-company/news-and-media/2025-press-releases/rjf20250129-1q-presentation.pdf
+
+###############################################
+# HEALTH & STATUS
+###############################################
 ### Test 1: Ping
-GET http://localhost:8080/ping
+GET {{baseUrl}}/ping
 
 ### Test 2: Health Check
-GET http://localhost:8080/health
+GET {{baseUrl}}/health
 Accept: application/json
 
-### Test 3: Open Swagger docs
-GET http://localhost:8080/docs
+### Test 3: Config Summary
+GET {{baseUrl}}/config-info
+Accept: application/json
 
-# ### Test 3: Empty Prompt (Should Fail)
-# POST http://localhost:8080/invocations
-# Content-Type: application/json
+### Test 4: Open Swagger docs
+GET {{baseUrl}}/docs
 
-# {
-#   "input": {
-#     "prompt": ""
-#   }
-# }
+###############################################
+# DOCUMENT PROCESSING
+###############################################
+### Test 1: Process Document - Raymond James Q1 Presentation (via URL)
+POST {{baseUrl}}/document/process?url={{pdfUrl}}&force_rebuild=true&extract_images=true
+
+### Test 2: Process Document - Force Rebuild
+POST {{baseUrl}}/document/process?url={{pdfUrl}}&force_rebuild=true&extract_images=true
+
+### Test 3: Process Document - Without Image Extraction
+POST {{baseUrl}}/document/process?url={{pdfUrl}}&force_rebuild=false&extract_images=false
+
+###############################################
+# QUERY ENDPOINTS (Run after processing)
+###############################################
+### Test 1: Query - What is the revenue?
+POST {{baseUrl}}/query
+Content-Type: application/json
+
+{
+  "query": "What is the revenue?",
+  "similarity_top_k": 10,
+  "include_images": true,
+  "max_image_size_mb": 5.0,
+  "verbose": true
+}
+
+### Test 2: Query - Financial highlights
+POST {{baseUrl}}/query
+Content-Type: application/json
+
+{
+  "query": "What are the key financial highlights from the presentation?",
+  "similarity_top_k": 15,
+  "include_images": true,
+  "max_image_size_mb": 5.0,
+  "verbose": true
+}
+
+### Test 3: Query - Net income
+POST {{baseUrl}}/query
+Content-Type: application/json
+
+{
+  "query": "What is the net income?",
+  "similarity_top_k": 10,
+  "include_images": true,
+  "max_image_size_mb": 5.0,
+  "verbose": true
+}
+
+### Test 4: Query - Assets under administration
+POST {{baseUrl}}/query
+Content-Type: application/json
+
+{
+  "query": "What are the total assets under administration?",
+  "similarity_top_k": 10,
+  "include_images": true,
+  "max_image_size_mb": 5.0,
+  "verbose": true
+}
+
+### Test 5: Query - Quarter over quarter growth
+POST {{baseUrl}}/query
+Content-Type: application/json
+
+{
+  "query": "Compare the quarter-over-quarter growth",
+  "similarity_top_k": 20,
+  "include_images": true,
+  "max_image_size_mb": 5.0,
+  "verbose": true
+}
+
+### Test 6: Query - Without images (faster)
+POST {{baseUrl}}/query
+Content-Type: application/json
+
+{
+  "query": "What is the revenue?",
+  "similarity_top_k": 10,
+  "include_images": false,
+  "verbose": false
+}
+
+### Test 7: Query - High top_k for comprehensive answer
+POST {{baseUrl}}/query
+Content-Type: application/json
+
+{
+  "query": "Summarize the key metrics and performance indicators",
+  "similarity_top_k": 30,
+  "include_images": true,
+  "max_image_size_mb": 5.0,
+  "verbose": true
+}
+
+###############################################
+# DEMO PAGE
+###############################################
+
+### 14. Open Demo Page (in browser)
+# http://localhost:8000/query/demo
+
+###
+
+###############################################
+# ERROR CASES
+###############################################
+
+### Test 1: Query - Before Processing Document (should fail)
+# Run this BEFORE processing any document
+POST {{baseUrl}}/query
+Content-Type: application/json
+
+{
+  "query": "What is the revenue?",
+  "similarity_top_k": 10,
+  "include_images": true
+}
+
+### Test 2: Process - Invalid URL (should fail)
+POST {{baseUrl}}/document/process
+Content-Type: application/json
+
+{
+  "url": "https://invalid-url-does-not-exist.com/document.pdf",
+  "force_rebuild": false
+}
+
+### Test 3: Query - Empty query (should fail)
+POST {{baseUrl}}/query
+Content-Type: application/json
+
+{
+  "query": "",
+  "similarity_top_k": 10,
+  "include_images": true
+}
+
+### Test 4: Query - Invalid similarity_top_k (should fail)
+POST {{baseUrl}}/query
+Content-Type: application/json
+
+{
+  "query": "What is the revenue?",
+  "similarity_top_k": 100,
+  "include_images": true
+}

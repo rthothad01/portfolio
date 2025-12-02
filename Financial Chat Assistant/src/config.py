@@ -53,7 +53,7 @@ class Config:
     images_dir: Path = field(default_factory=lambda: Path("data\images"))
     storage_dir: Path = field(default_factory=lambda: Path("data\storage_nodes_summary"))
     cache_dir: Path = field(default_factory=lambda: Path("cache"))
-    
+
     # Model Configuration
     embedding_model: str = "text-embedding-3-large"
     embedding_dimensions: int = 3072
@@ -94,6 +94,19 @@ class Config:
             raise ValueError(
                 f"Invalid model name: {self.llm_model}. Did you mean 'gpt-4o'?"
             )
+        
+        # Convert relative paths to absolute paths based on project_root
+        if not self.data_dir.is_absolute():
+            self.data_dir = self.project_root / self.data_dir
+        
+        if not self.images_dir.is_absolute():
+            self.images_dir = self.project_root / self.images_dir
+        
+        if not self.storage_dir.is_absolute():
+            self.storage_dir = self.project_root / self.storage_dir
+        
+        if not self.cache_dir.is_absolute():
+            self.cache_dir = self.project_root / self.cache_dir
     
     @property
     def pdf_path(self) -> Path:

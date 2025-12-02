@@ -17,7 +17,13 @@ class DocumentUtils:
     @staticmethod
     def extract_page_number(filename: str) -> int:
         """
-        Extract page number from filename
+        Extract page number from filename with flexible pattern matching
+        
+        Supports patterns like:
+        - document-page-5.jpg
+        - page-5.jpg
+        - page_5.jpg
+        - rjf1q25-page-5.jpg
         
         Args:
             filename: Image filename (e.g., 'document-page-5.jpg')
@@ -25,8 +31,22 @@ class DocumentUtils:
         Returns:
             Page number or float('inf') if not found
         """
-        match = re.search(r'-page-(\d+)\.jpg$', str(filename))
-        return int(match.group(1)) if match else float('inf')
+          # Try multiple patterns
+        patterns = [
+            r'-page-(\d+)\.jpg$',      # document-page-5.jpg
+            r'page-(\d+)\.jpg$',       # page-5.jpg
+            r'page_(\d+)\.jpg$',       # page_5.jpg
+            r'_(\d+)\.jpg$',           # document_5.jpg
+        ]
+
+        for pattern in patterns:
+            match = re.search(pattern, str(filename), re.IGNORECASE)
+            if match:
+                return int(match.group(1))
+        
+        # If no pattern matches, log warning and return infinity
+        logger.warning(f"Could not extract page number from filename: {filename}")
+        return float('inf')
     
     @staticmethod
     def get_sorted_image_files(image_dir: Path) -> List[Path]:
@@ -50,10 +70,7 @@ class DocumentUtils:
         return sorted(files, key=lambda f: DocumentUtils.extract_page_number(f.name))
     
     @staticmethod
-    def create_text_nodes(
-        json_pages: List[dict], 
-        image_dir: Path
-    ) -> List[TextNode]:
+    def create_text_nodes(json_pages: List[dict], image_dir: Path) -> List[TextNode]:
         """
         Create TextNode objects from parsed JSON pages
         
@@ -72,7 +89,15 @@ class DocumentUtils:
         nodes = []
         sorted_images = DocumentUtils.get_sorted_image_files(image_dir)
         
+        # Log image filenames for debugging
+        logger.info(f"Found {len(sorted_images)} images in {image_dir}")
+        for i, img in enumerate(sorted_images):
+            page_num = DocumentUtils.extract_page_number(img.name)
+            logger.info(f"  Image {i}: {img.name} -> page {page_num}")
+        
+        logger.info(f"Creating nodes for {len(json_pages)} pages")
         for idx, page_data in enumerate(json_pages):
+            page_num = idx + 1
             metadata = {
                 'page_num': idx + 1,
                 'parsed_text_markdown': page_data.get('md', ''),
@@ -81,14 +106,18 @@ class DocumentUtils:
             # Add image path if available
             if idx < len(sorted_images):
                 metadata['image_path'] = str(sorted_images[idx])
+                logger.debug(f"Page {page_num} matched to image: {sorted_images[idx].name}")
             else:
-                logger.warning(f"No image found for page {idx + 1}")
+                logger.warning(f"No image found for page {page_num} (index {idx})")
+                logger.warning(f"  Total images: {len(sorted_images)}, Total pages: {len(json_pages)}")
             
             # Create node with empty text (metadata contains the actual content)
             node = TextNode(text="", metadata=metadata)
             nodes.append(node)
         
         logger.info(f"Created {len(nodes)} text nodes")
+        logger.info(f"  Nodes with images: {sum(1 for n in nodes if 'image_path' in n.metadata)}")
+        logger.info(f"  Nodes without images: {sum(1 for n in nodes if 'image_path' not in n.metadata)}")
         return nodes
     
 class IndexBuilder:
@@ -112,8 +141,7 @@ class IndexBuilder:
         self.index: Optional[SummaryIndex] = None
         logger.info("IndexBuilder initialized")
 
-    def build_index(self, text_nodes: List[TextNode],
-        force_rebuild: bool = False) -> SummaryIndex:
+    def build_index(self, text_nodes: List[TextNode], force_rebuild: bool = False) -> SummaryIndex:
         """
         Build or load summary index from text nodes
         

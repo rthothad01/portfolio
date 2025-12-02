@@ -68,6 +68,11 @@ class QueryEngineBuilder:
             
         Returns:
             Query engine configured for structured output
+                    # Validate index
+                    if index is None:
+                        logger.error("Cannot create query engine: index is None. Process a document first.")
+                        return None
+            
         """
         try:
             # Use defaults from config if not provided
@@ -106,12 +111,16 @@ class QueryEngineBuilder:
             logger.error(f"Failed to create query engine: {e}", exc_info=True)
             raise
       
-    def query(self, query_text: str, verbose: bool = False) -> Optional[ReportOutput]:
+    def query(self, query_text: str, verbose: bool = False,
+              include_images: bool = True,
+              max_image_size_mb: float = 5.0) -> Optional[ReportOutput]:
         """
         Execute a query        
         Args:
             query_text: The question to ask
             verbose: If True, log detailed query info
+            include_images: If True, load images as base64
+            max_image_size_mb: Maximum image size to load (MB)
         Returns:
             ReportOutput or None if query fails
         """
@@ -127,8 +136,30 @@ class QueryEngineBuilder:
             
             if verbose:
                 logger.info(f"Query successful, got {len(response.source_nodes)} source nodes")
+
+                logger.info(f"Response type: {type(response.response)}")
+                logger.info(f"Number of blocks: {len(response.response.blocks)}")
             
-            return response.response
+                for i, block in enumerate(response.response.blocks):
+                    logger.info(f"Block {i}: type={block.type}")
+                    if hasattr(block, 'file_path'):
+                        logger.info(f"  - file_path: {block.file_path}")
+                        logger.info(f"  - base64_data: {block.base64_data[:50] if block.base64_data else 'None'}...")
+                        logger.info(f"  - mime_type: {block.mime_type}")
+            
+            report = response.response
+
+            if include_images and isinstance(report, ReportOutput):
+                logger.info("Loading images as base64...")
+                result = report.load_all_images(max_size_mb=max_image_size_mb)
+                logger.info(
+                        f"Image loading complete - "
+                        f"Successful: {result['successful']}, "
+                        f"Failed: {result['failed']}, "
+                        f"Skipped: {result['skipped']}"
+                    )
+        
+            return 
             
         except Exception as e:
             logger.error(f"Query failed: {e}", exc_info=True)
