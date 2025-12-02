@@ -37,14 +37,44 @@ Engineered an intelligent document analysis system that enables natural language
 - "What are the key financial highlights with visual evidence?"
   
 <!-- Google drive - Hypothetical Answers-->
-### Retrieve News Articles using Hypothetical Answers/HyDE
+### Hypothetical Answer-Based News Retrieval System
 
-- Developed a News assistant to answer broad-themed questions such as "What impact does the anti-trust case against google have on its long term value?"
-  
-1. Used LLM to generate 10 different questions for the user question and LLM to generate hypothetical answers for those questions.
-2. Fetched news articles for the ticker using newsapi.org.
-3. Used similarity ranking to rank the fetched news articles against the hypothetical answers.
-4. Returned the top n news articles.
+Developed an advanced information retrieval system that uses Large Language Models to generate hypothetical answers and search queries, significantly improving the relevance and precision of news article retrieval compared to traditional keyword-based search methods.
+
+**Key Achievements:**
+
+- **Multi-LLM Query Generation**: Orchestrated three OpenAI models (GPT-3.5-turbo, GPT-4o-mini, GPT-4o) to generate diverse search queries from single user questions, expanding query coverage by 10x while maintaining semantic coherence
+- **Hypothetical Document Embeddings (HyDE)**: Implemented cutting-edge retrieval technique where LLMs generate hypothetical answers that are embedded and used for similarity matching, improving retrieval relevance over keyword search
+- **Semantic Similarity Ranking**: Built cosine similarity-based ranking system using OpenAI embeddings (text-embedding-3-small) to surface the most contextually relevant articles from hundreds of candidates
+- **Automated Evaluation Pipeline**: Integrated DeepEval's Faithfulness metrics with GPT-4o to quantitatively assess answer quality and source attribution, enabling data-driven model comparison
+
+**Technical Stack:**
+
+- **LLMs**: OpenAI GPT-3.5-turbo, GPT-4o-mini, GPT-4o for query generation and hypothetical answers
+- **Embeddings**: text-embedding-3-small (1536 dimensions) for semantic search
+- **APIs**: NewsAPI for real-time article retrieval, OpenAI API for completions
+- **Evaluation**: DeepEval framework for faithfulness scoring and RAG assessment
+- **Infrastructure**: Python, scipy for similarity computation, Jupyter for experimentation
+
+**Business Impact:**
+
+- Reduces information overload by surfacing only the most relevant articles for complex queries
+- Enables nuanced search beyond simple keyword matching (e.g., understanding context and intent)
+- Provides quantitative quality metrics (faithfulness scores) for answer reliability
+- Scales efficiently across multiple LLM providers for cost-performance optimization
+
+**Sample Queries Supported:**
+
+- "What impact did the global outage of CrowdStrike have on Microsoft's stock price?"
+- "What is the impact of inflation on the economy?"
+- "How does the anti-trust case against Google affect its long-term value?"
+
+**Methodology:**
+
+1. **Query Expansion**: User question → LLM generates 10 diverse search queries
+2. **Hypothetical Answers**: Each LLM produces hypothetical answers for the question
+3. **Article Retrieval**: NewsAPI fetches recent articles matching generated queries
+4. **Semantic Ranking**: Articles ranked by cosine similarity to hypothetical answer embeddings
 
 <!-- Refer to git's LLM/Agentic AI/5.Notebooks.5 -->
 ### Search engine retriever
