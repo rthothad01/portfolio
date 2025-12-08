@@ -49,6 +49,7 @@ result = processor.process_document(file_path=file_path)
 
 if result:
     pages, images_dir = result
+    print(f"Images director is {images_dir}")
     print("✓ Document processing successful")
     
     # Create text nodes
@@ -68,6 +69,7 @@ if result:
     # Test query
     query="What is the Net Interest Income for Q1 2025?"
     response = qe_builder.query(query)
+    
     if response:
         print("✓ Query executed successfully")
         print(f"Query: {query}")

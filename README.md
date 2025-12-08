@@ -36,7 +36,8 @@ Engineered an intelligent document analysis system that enables natural language
 - "Compare business unit performance and identify risk factors"
 - "What are the key financial highlights with visual evidence?"
   
-<!-- Google drive - Hypothetical Answers-->
+<!-- Google drive - Hypothetical Answers (or)-->
+<!--https://github.com/rthothad01/LLM/blob/main/Agentic%20AI/Demo/Hypothetical_Answers.ipynb-->
 ### Hypothetical Answer-Based News Retrieval System
 
 Developed an advanced information retrieval system that uses Large Language Models to generate hypothetical answers and search queries, significantly improving the relevance and precision of news article retrieval compared to traditional keyword-based search methods.
@@ -108,25 +109,45 @@ Developed an advanced information retrieval system that uses Large Language Mode
 2. Built 2 agents, one to act as a Financial News Analyst, whose role is to collect and analyze financial news article to identify sentiment (and).
 3. Another agent to act as a Data Analyst, whose role is to analyze historical market data to identify trends.
 <!-- Refer to TechNotes git's LLM/Agentic AI/BuildingAIAgentswithLangChain/notebooks/Module5/M5_Build_a_Financial_Analyst_ReAct_Agentic_AI_System_with_LangChain.ipynb-->
-### Financial Analyst Agent (ReAct Based Agent)
+### Financial Analyst ReAct Agent with Multi-Source Market Intelligence
 
-Created an updated version of the above and converted it to a ReAct based agent with 2 flows. One to get information about specific stocks and another flow to get general market information. Used GPT-4o, which helps with function calling and LangChain/LangGraph
+Developed an autonomous AI financial analyst that provides real-time market insights by intelligently orchestrating multiple financial data sources through a ReAct reasoning framework, enabling investors to make data-driven decisions through natural language queries.
 
-The tools built are listed below. Used OpenBB to integrate with different data providers to get required data.
+**Key Achievements:**
 
-- GET_STOCK_TICKER: Validates and fetches stock tickers based on user queries. Integrated with OpenBB to get this data from SEC. This integration also helps convert say NVIDIA to NVDA.
+- **Dual-Flow ReAct Architecture**: Designed intelligent query routing system that classifies requests into market-wide analysis vs. stock-specific deep-dives, selecting optimal tool combinations for each scenario
+- **Multi-Provider Data Integration**: Unified 5+ authoritative data sources (SEC Edgar, CBOE, Finviz, Yahoo Finance, TMX) through OpenBB platform, eliminating manual aggregation across disparate APIs
+- **Smart Ticker Validation**: Implemented SEC integration that resolves natural language company names to official symbols with CIK validation, preventing erroneous queries (e.g., "NVIDIA" → "NVDA" + SEC verification)
+- **Comprehensive Analysis Pipeline**: Built 5 specialized tools that work in concert to deliver holistic investment insights combining price data, fundamentals, news sentiment, and market context
 
-- GET_STOCK_PRICE_METRICS: Retrieves current price, historical price and performance data for specific stocks. This was also integrated with OpenBB and used CBOE to get price data, finviz to get performance data and yfinance for historical price.
-- GET_STOCK_NEWS: Extracts recent news articles related to stocks or markets. Used tmx provider via OpenBB to get this information.
-- GET_STOCK_FUNDAMENTAL_INDICATOR_METRICS: Provides insights into financial indicators like P/E ratio, ROE, etc. Integrated with OpenBB's fundamental and ratios metrics
-- GET_GENERAL_MARKET_DATA: Fetches general market trends and data for the whole market such as most actively traded stocks based on volume, top gainers and top losers. Used yfinance to get the data.
+**Technical Stack:**
 
-This will help answer questions such as
+- **Agent Framework**: LangGraph's create_react_agent for modern agentic workflows
+- **LLM**: OpenAI GPT-4o with function calling for structured tool invocation
+- **Data Platform**: OpenBB for unified financial data access
+- **Data Sources**: SEC Edgar (company validation), CBOE (real-time pricing), Finviz (performance metrics), Yahoo Finance (historical data), TMX (news feeds)
+- **Infrastructure**: Python, LangChain, pandas for data manipulation
 
-1. How is the market doing today?
-2. Is it the right time to invest in NVDA?
+**Business Impact:**
 
-The key benefit of an agentic financial analyst is to provide quick access to multi-source financial data and insights.
+- Reduces investment research time through automated multi-source data aggregation
+- Consolidates 5+ manual data lookups into single natural language query
+- Provides institutional-grade analysis accessible to retail investors
+- Delivers comprehensive insights in seconds vs. hours of manual research
+
+**Sample Queries Supported:**
+
+- "How is the market doing today?" → Top 15 movers, volume leaders, market trends
+- "Should I invest in NVIDIA?" → Price metrics, P/E ratios, recent news, fundamental analysis
+- "What are the top gainers with strong fundamentals?" → Filtered analysis across multiple dimensions
+
+**Technical Highlights:**
+
+- **Tool 1 - GET_STOCK_TICKER**: SEC Edgar integration for ticker validation and CIK lookup
+- **Tool 2 - GET_STOCK_PRICE_METRICS**: Multi-provider aggregation (CBOE, Finviz, yfinance) for comprehensive pricing data
+- **Tool 3 - GET_STOCK_NEWS**: TMX news feed integration with relevance filtering
+- **Tool 4 - GET_STOCK_FUNDAMENTAL_INDICATOR_METRICS**: Financial ratios and indicators (P/E, ROE, EBITDA, debt metrics)
+- **Tool 5 - GET_GENERAL_MARKET_DATA**: Market-wide screeners for top movers and volume analysis
 
 ### Financial Analyst Agent (Strands Agent)
 
