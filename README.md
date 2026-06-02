@@ -1,5 +1,6 @@
 <!-- https://rthothad01.github.io/portfolio/ -->
 # Portfolio
+Production AI/ML systems built to explore and validate techniques used in enterprise financial applications. Projects include end-to-end pipelines, evaluation frameworks, and cloud-native deployments.
 
 ## LLM Projects - RAG
 
